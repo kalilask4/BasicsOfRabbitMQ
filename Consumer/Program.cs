@@ -10,12 +10,12 @@ var queueName = "test-queue";
 channel.QueueDeclare(queueName, exclusive: false, autoDelete: false);
 
 var consumer = new EventingBasicConsumer(channel);
-
 channel.BasicConsume(queueName, true, consumer);
 consumer.Received += (sender, args) =>
 {
-    var message = Encoding.UTF8.GetString(args.Body.ToArray());
-    Console.WriteLine(message);
+    File.WriteAllBytes("test.txt", args.Body.ToArray());
+    //var message = Encoding.UTF8.GetString(args.Body.ToArray());
+    //Console.WriteLine(message);
 };
 
 

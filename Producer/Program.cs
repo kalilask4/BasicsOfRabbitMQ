@@ -8,8 +8,10 @@ using var channel = connection.CreateModel();
 var queueName = "test-queue";
 channel.QueueDeclare(queueName, exclusive: false, autoDelete: false);
 
-var message = "test message";
-var body = Encoding.UTF8.GetBytes(message);
+//var message = "test message";
+//var body = Encoding.UTF8.GetBytes(message);
+var body = File.ReadAllBytes(@"F:\.AspSource\CleannetCode18\RabbitMQ\gistfile1.txt");
+
 channel.BasicPublish(string.Empty, queueName, null, body);
     
 channel.Close();    
